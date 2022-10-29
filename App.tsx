@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/HomeScreen";
 import UserScreen from "./screens/UserScreen";
-import TrendScreen from "./screens/TrendScreens";
+import TrendScreen from "./screens/TrendScreen";
 import BookScreen from "./screens/BookScreens";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";

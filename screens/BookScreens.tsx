@@ -1,22 +1,32 @@
-import React from "react";
-import { View, Text, Box, Center, Checkbox, Heading, HStack, Icon, IconButton, Input, useToast, VStack, useTheme, ScrollView, Container, Card } from "native-base"
+import React, { ReactElement, useState } from "react";
+import { View, Text, Box, Center, Checkbox, Heading, HStack, Icon, IconButton, Input, useToast, VStack, useTheme, ScrollView, Container, Card, Button } from "native-base"
 import { Feather, Entypo } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
 
 const BookScreen = () => {
     const {
         colors
-      } = useTheme();
-      const { width } = Dimensions.get("window");
-      const items = [];
+    } = useTheme();
 
-      for (let i = 0; i < 5; i++) {
-        items.push(
-            <Center key={i} bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">
-                Item
-            </Center>
-        )
-      }
+    // 画面からサイズを取得
+    const { width } = Dimensions.get("window");
+
+
+    // アイテムの追加
+    const [items, setItems]: [
+        ReactElement[],
+        React.Dispatch<React.SetStateAction<ReactElement[]>>
+    ] = useState<ReactElement[]>(
+        [...Array(2)].map((v, i) => {
+            return <Center key={i} bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">Item</Center>
+        })
+    );
+
+    // アイテムを追加する構文
+    const addItem = () => {
+        setItems([...items, <Center key={ items.length } bg="secondary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">Item</Center>])
+    }
+
     return (
         <View>
             <ScrollView w="100%" h="80">
@@ -36,8 +46,8 @@ const BookScreen = () => {
                         <Center bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">Box</Center> */}
                         {items}
                     </HStack>
-                    <Card />
                 </ScrollView>
+                <Button onPress={ addItem }>アイテムを追加</Button>
             </ScrollView>
         </View>
     ) 

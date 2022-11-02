@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Spinner } from "native-base";
-import CardList from "../components/CardList";
 
 const TrendScreen = () => {
     // const [ photos, setPhotos ] = useState([]);

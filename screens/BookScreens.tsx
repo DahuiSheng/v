@@ -29,7 +29,11 @@ const BookScreen = () => {
 
     return (
         <View>
-            <ScrollView w="100%" h="80">
+            <ScrollView
+                w="100%" h="100%"
+                _dark={{ bg: "blueGray.900" }}
+                _light={{ bg: "blueGray.50" }}
+            >
                 <Container mt="3" mb="4" ml="4">
                     <Heading fontSize="xl">来週のイベント</Heading>
                 </Container>

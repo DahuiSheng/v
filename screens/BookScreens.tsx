@@ -1,85 +1,46 @@
 import React from "react";
-import { View, Text, Box, Center, Checkbox, Heading, HStack, Icon, IconButton, Input, useToast, VStack } from "native-base"
+import { View, Text, Box, Center, Checkbox, Heading, HStack, Icon, IconButton, Input, useToast, VStack, useTheme, ScrollView, Container, Card } from "native-base"
 import { Feather, Entypo } from "@expo/vector-icons";
+import { Dimensions } from "react-native";
 
 const BookScreen = () => {
-    const instState = [{
-        title: "Code",
-        isCompleted: true
-      }, {
-        title: "Meeting with team at 9",
-        isCompleted: false
-      }, {
-        title: "Check Emails",
-        isCompleted: false
-      }, {
-        title: "Write an article",
-        isCompleted: false
-      }];
-      const [list, setList] = React.useState(instState);
-      const [inputValue, setInputValue] = React.useState("");
-      const toast = useToast();
-    
-    const addItem = (title:string) => {
-        if (title === "") {
-          toast.show({
-            title: "Please Enter Text",
-          });
-          return;
-        }
-    
-        setList(prevList => {
-          return [...prevList, {
-            title: title,
-            isCompleted: false
-          }];
-        });
-    };
-    
-    const handleDelete = (index:number) => {
-        setList(prevList => {
-          const temp = prevList.filter((_, itemI) => itemI !== index);
-          return temp;
-        });
-    };
-    
-    const handleStatusChange = (index:number) => {
-        setList(prevList => {
-          const newList = [...prevList];
-          newList[index].isCompleted = !newList[index].isCompleted;
-          return newList;
-        });
-    };
+    const {
+        colors
+      } = useTheme();
+      const { width } = Dimensions.get("window");
+      const items = [];
 
-    return <Center w="100%">
-            <Box maxW="300" w="100%">
-                <Heading mb="2" size="md">
-                Wednesday
-                </Heading>
-                <VStack space={4}>
-                <HStack space={2}>
-                    <Input flex={1} onChangeText={v => setInputValue(v)} value={inputValue} placeholder="Add Task" />
-                    <IconButton borderRadius="sm" variant="solid" icon={<Icon as={Feather} name="plus" size="sm" color="warmGray.50" />} onPress={() => {
-                    addItem(inputValue);
-                    setInputValue("");
-                }} />
-                </HStack>
-                <VStack space={2}>
-                    {list.map((item, itemI) => <HStack w="100%" justifyContent="space-between" alignItems="center" key={item.title + itemI.toString()}>
-                        <Checkbox isChecked={item.isCompleted} onChange={() => handleStatusChange(itemI)} value={item.title}></Checkbox>
-                        <Text width="100%" flexShrink={1} textAlign="left" mx="2" strikeThrough={item.isCompleted} _light={{
-                    color: item.isCompleted ? "gray.400" : "coolGray.800"
-                    }} _dark={{
-                    color: item.isCompleted ? "gray.400" : "coolGray.50"
-                    }} onPress={() => handleStatusChange(itemI)}>
-                        {item.title}
-                        </Text>
-                        <IconButton size="sm" colorScheme="trueGray" icon={<Icon as={Entypo} name="minus" size="xs" color="trueGray.400" />} onPress={() => handleDelete(itemI)} />
-                    </HStack>)}
-                </VStack>
-                </VStack>
-            </Box>
-        </Center>;
+      for (let i = 0; i < 5; i++) {
+        items.push(
+            <Center key={i} bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">
+                Item
+            </Center>
+        )
+      }
+    return (
+        <View>
+            <ScrollView w="100%" h="80">
+                <Container mt="3" mb="4" ml="4">
+                    <Heading fontSize="xl">来週のイベント</Heading>
+                </Container>
+
+                <ScrollView
+                    horizontal={true}
+                    height = "33%"
+                    width="100%"
+                    // bgColor="emerald.400"
+                >
+                    <HStack>
+                        {/* <Center bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">Box</Center>
+                        <Center bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">Box</Center>
+                        <Center bg="primary.400" m="2" w={width * 0.6} h="32" rounded="md" _text={{ color: 'white' }} shadow="1">Box</Center> */}
+                        {items}
+                    </HStack>
+                    <Card />
+                </ScrollView>
+            </ScrollView>
+        </View>
+    ) 
 };
 
 export default BookScreen;

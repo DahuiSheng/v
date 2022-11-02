@@ -3,30 +3,33 @@ import { View, Text, Spinner } from "native-base";
 import CardList from "../components/CardList";
 
 const TrendScreen = () => {
-    const [ photos, setPhotos ] = useState([]);
-    const [ loading, setLoading ] = useState(true);
-    useEffect(() => {
-        let unmounted = false;
-        const init = async () => {
-            const photos = await getPhotos();
-            if (!unmounted) {
-                setLoading(false);
-                setPhotos(photos);
-            }
-        } ;
-        init();
+    // const [ photos, setPhotos ] = useState([]);
+    // const [ loading, setLoading ] = useState(true);
+    // useEffect(() => {
+    //     let unmounted = false;
+    //     const init = async () => {
+    //         const photos = await getPhotos();
+    //         if (!unmounted) {
+    //             setLoading(false);
+    //             setPhotos(photos);
+    //         }
+    //     } ;
+    //     init();
 
-        //Cleanup関数
-        return () => {
-            unmounted = true;
-        };
-    }, [photos]);
+    //     //Cleanup関数
+    //     return () => {
+    //         unmounted = true;
+    //     };
+    // }, [photos]);
 
-    const content = loading ? <Spinner /> : <CardList photos={photos} />
+    // const content = loading ? <Spinner /> : <CardList photos={photos} />
 
     return (
         <View>
-            {content}
+            {/* {content} */}
+            <Text>
+                View
+            </Text>
         </View>
     );
 };
